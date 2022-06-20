@@ -17,8 +17,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import Add from '@mui/icons-material/Add';
+import KeyIcon from '@mui/icons-material/Key'; import Add from '@mui/icons-material/Add';
+import { useNavigate } from "react-router-dom";
+import TvIcon from '@mui/icons-material/Tv';
+
 
 
 const drawerWidth = 240;
@@ -95,6 +97,22 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MiniDrawer(props: any) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+
+
+  function handleClickButton(text: String) {
+    if (text === 'Cadastro usuários') {
+      navigate("/mainPage");
+    } else if (text === 'Retirar senha'){
+      navigate("/senhas");
+    } else if(text === 'Painel'){
+      navigate("/painel");
+    }
+  }
+
+  function handleGoCadastro() {
+    navigate("/mainPage");
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -107,7 +125,7 @@ export default function MiniDrawer(props: any) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar sx={{backgroundColor:'black'}} position="fixed" open={open}>
+      <AppBar sx={{ backgroundColor: 'black' }} position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -127,16 +145,17 @@ export default function MiniDrawer(props: any) {
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader sx={{backgroundColor:'black'}}>
+        <DrawerHeader sx={{ backgroundColor: 'black' }}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon sx={{color:'white'}} /> : <ChevronLeftIcon sx={{color:'white'}} />}
+            {theme.direction === 'rtl' ? <ChevronRightIcon sx={{ color: 'white' }} /> : <ChevronLeftIcon sx={{ color: 'white' }} />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {['Cadastro usuários', 'Senhas'].map((text, index) => (
+          {['Cadastro usuários', 'Retirar senha', 'Painel'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
+                onClick={() =>handleClickButton(text)}
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
@@ -150,14 +169,14 @@ export default function MiniDrawer(props: any) {
                     justifyContent: 'center',
                   }}
                 >
-                  {text === 'Cadastro usuários' ? <Add /> : <MailIcon />}
+                  {text === 'Cadastro usuários' ? <Add/> : text === 'Retirar senha' ? <KeyIcon/> : <TvIcon/>}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-        
+
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
@@ -166,3 +185,7 @@ export default function MiniDrawer(props: any) {
     </Box>
   );
 }
+function useHistory() {
+  throw new Error('Function not implemented.');
+}
+

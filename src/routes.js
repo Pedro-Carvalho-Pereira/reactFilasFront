@@ -2,6 +2,10 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import Login from './pages/login';
 import MainPage from './pages/mainpage';
+import Senhas from './pages/senhas';
+import Painel from './pages/painel';
+
+
 
 
 /*
@@ -21,6 +25,8 @@ export default function RoutesApp() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/mainPage" element={<MainPage />} />
+        <Route path="/senhas" element={<Senhas />} />
+        <Route path="/painel" element={<Painel />} />
       </Routes>
     </BrowserRouter>
   );

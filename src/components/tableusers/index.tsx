@@ -13,6 +13,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Button } from '@mui/material'
 import { useEffect } from 'react';
+import DraggableDialogEditUser from '../dialogedituser';
+import service from '../../services/service';
 
 
 
@@ -37,7 +39,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export type typePropsTable = {
-  users: TypeUser[]
+  users: TypeUser[],
+  added: () => void
 }
 
 function createData(
@@ -51,12 +54,39 @@ function createData(
 
 
 
-export default function Tableusers(props: typePropsTable) {
+export default function Tableusers(props: any) {
   const [usuarios, setUsuarios] = React.useState<TypeUser[]>([]);
+  const [added, setAdded] = React.useState<Boolean>(false);
+  const [open, setOpen] = React.useState(false);
+  const [userEdit, setUserEdit] = React.useState<TypeUser>();
+  let token = localStorage.getItem('@token');
+
+
+
 
   useEffect(() => {
     setUsuarios(props.users);
   }, [props]);
+
+  function handleEditUser(item: any) {
+    setUserEdit(item);
+    setOpen(true);
+  }
+
+  function handleDeleteUser(item: any) {
+    service.deleteuser(item, token!)
+      .then((response) => {
+          console.log(response);
+          props.added(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -71,25 +101,29 @@ export default function Tableusers(props: typePropsTable) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {usuarios.map((row) => (
-            <StyledTableRow key={row.nome}>
+          {usuarios.map((item) => (
+            <StyledTableRow key={item.nome}>
               <StyledTableCell component="th" scope="row">
-                {row.nome}
+                {item.nome}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.email}</StyledTableCell>
-              <StyledTableCell align="center">{row.permission}</StyledTableCell>
-              <StyledTableCell sx={{ justifyContent: 'center',display:'flex' }}>
-                <Button sx={{ background: 'black', marginRight:'5px' }}  variant="contained"  >
+              <StyledTableCell align="right">{item.email}</StyledTableCell>
+              <StyledTableCell align="center">{item.permission}</StyledTableCell>
+              <StyledTableCell sx={{ justifyContent: 'center', display: 'flex' }}>
+                <Button onClick={() => handleEditUser(item)} sx={{ background: 'black', marginRight: '5px' }} variant="contained"   >
                   <EditIcon />
                 </Button>
-                <Button sx={{ background: 'red' }}  variant="contained"  >
+                <Button onClick={() => handleDeleteUser(item)} sx={{ background: 'red' }} variant="contained"  >
                   <ClearIcon />
                 </Button>
               </StyledTableCell>
+
             </StyledTableRow>
+
           ))}
         </TableBody>
       </Table>
+      <DraggableDialogEditUser user={userEdit} added={props.added} open={open} handleClose={handleClose} />
+
     </TableContainer>
   );
 }

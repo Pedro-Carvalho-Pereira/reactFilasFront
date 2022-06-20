@@ -9,8 +9,15 @@ export type TypeLogin = {
     permission: string;
     senha: string;
   }
+
+  export type TypeEditUser = {
+    nome: string;
+    email: string;
+    permission: string;
+  }
   
   export type TypeUser = {
+    id: number;
     nome: string;
     email: string;
     permission: string;
@@ -153,4 +160,8 @@ export type TypeLogin = {
     veiculoStatus : {
       id: number;
     }
+  }
+
+  export type SenhaPreferencial = {
+    preferencial: string;
   }

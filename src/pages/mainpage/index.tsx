@@ -25,6 +25,7 @@ const MainPage = () => {
 
     useEffect(() => {
         loadUsers();
+        setAdded(false);
       }, [added]);
 
     const handleClose = () => {
@@ -48,7 +49,6 @@ const MainPage = () => {
             .then((response) => {
                 setList(response.data);
                 setDataOriginal(response.data);
-                console.log('Load Users deu certo');
             })
             .catch((error) => {
                 console.log(error);
@@ -122,7 +122,7 @@ const MainPage = () => {
                             </Grid>
 
                         </Grid>
-                        <Tableusers users={list} />
+                        <Tableusers added={setAdded} users={list} />
 
                     </Container>
                 </Box>

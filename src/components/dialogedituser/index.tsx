@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Paper, { PaperProps } from '@mui/material/Paper';
 import Draggable from 'react-draggable';
 import { FormControl, Grid, Input, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import { TypeSaveUser } from '../../services/types';
+import { TypeEditUser, TypeSaveUser } from '../../services/types';
 import service from '../../services/service';
 let token = localStorage.getItem('@token');
 
@@ -28,15 +28,25 @@ function PaperComponent(props: PaperProps) {
 
 
 
-export default function DraggableDialogAddUser(props: any) {
+export default function DraggableDialogEditUser(props: any) {
   const [open, setOpen] = React.useState(false);
   const [senha, setSenha] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [nome, setNome] = React.useState('');
+  const [id, setId] = React.useState('');
   const [permission, setPermission] = React.useState('');
 
 
+  React.useEffect(() => {
+    if (props.user) {
+      setId(props.user.id);
+      setEmail(props.user.email);
+      setPermission(props.user.permission);
 
+      setNome(props.user.nome);
+      console.log(props.user.permission);
+    }
+  }, [props.user]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -46,28 +56,23 @@ export default function DraggableDialogAddUser(props: any) {
     setOpen(false);
   };
 
-  function addUser() {
+  function editUser() {
 
-    const saveUsuario: TypeSaveUser = {
+    const editUsuario: TypeEditUser = {
       nome: nome,
       email: email,
-      permission: permission,
-      senha: senha
+      permission: permission
     }
 
-    service.saveusers(saveUsuario, token!)
+    service.editusers(editUsuario, token!, id)
       .then((response) => {
-        console.log('Usuário salvo com sucesso!', 'success');
+        console.log('Usuário editado com sucesso!', 'success');
         props.handleClose();
         props.added(true);
-        setNome('');
-        setEmail('');
-        setSenha('');
-        setPermission('');
         console.log("Load Again chamado")
       })
       .catch((error) => {
-        console.log('Erro ao salvar usuário!', 'error');
+        console.log('Erro ao editar usuário!', 'error');
       })
   }
 
@@ -80,35 +85,33 @@ export default function DraggableDialogAddUser(props: any) {
         aria-labelledby="draggable-dialog-title"
       >
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          Adicionar usuário
+          Editar usuário
         </DialogTitle>
         <Grid sx={{ mx: 3 }}>
-          <TextField style={{ width: '48%' }} value={nome} onChange={(n) => setNome(n.target.value)} id="outlined-basic" label="Nome" variant="outlined" />
-          <TextField style={{ width: '48%', marginLeft: '26px' }} value={email} onChange={(n) => setEmail(n.target.value)} id="outlined-basic" label="Email" variant="outlined" />
-          <TextField style={{ width: '48%', marginTop: '25px' }} value={senha} onChange={(n) => setSenha(n.target.value)} id="outlined-basic" label="Senha" variant="outlined" />
-
-          <FormControl style={{ width: '48%', marginTop: '25px', marginLeft: '26px' }}>
+          <Grid sx={{justifyContent:'space-around'}}>
+            <TextField sx={{marginRight:'40px'}} value={nome} onChange={(n) => setNome(n.target.value)} id="outlined-basic" label="Nome" variant="outlined" />
+            <TextField value={email} onChange={(n) => setEmail(n.target.value)} id="outlined-basic" label="Email" variant="outlined" />
+          </Grid>
+          <FormControl style={{ width: '100%', marginTop: '25px' }}>
             <InputLabel id="demo-simple-select-label">Permissão</InputLabel>
             <Select
               value={permission}
               label="Permissão"
               onChange={e => setPermission(e.target.value)}
             >
-              <MenuItem value={'CAIXA'}>Caixa</MenuItem>
               <MenuItem value={'ADMIN'}>Admin</MenuItem>
+              <MenuItem value={'CAIXA'}>Caixa</MenuItem>
             </Select>
           </FormControl>
 
 
-          <Grid sx={{ mx: 3 }}>
-          </Grid>
         </Grid>
 
         <DialogActions style={{ marginRight: '20px' }}>
           <Button autoFocus onClick={props.handleClose}>
             Fechar
           </Button>
-          <Button onClick={addUser}>Salvar</Button>
+          <Button onClick={editUser}>Salvar</Button>
         </DialogActions>
 
 
