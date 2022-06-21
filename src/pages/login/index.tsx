@@ -31,6 +31,7 @@ export default function Login() {
         console.log(response.data);
         localStorage.setItem('@token', response.data.access_token);
         localStorage.setItem('@permission', response.data.permission);
+        localStorage.setItem('@userId', response.data.userId);
 
         if (response.data.permission === 'ADMIN') {
           window.history.replaceState(null, '', "/mainpage");

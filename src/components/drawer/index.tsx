@@ -20,6 +20,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import KeyIcon from '@mui/icons-material/Key'; import Add from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import TvIcon from '@mui/icons-material/Tv';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 
 
@@ -107,6 +108,8 @@ export default function MiniDrawer(props: any) {
       navigate("/senhas");
     } else if(text === 'Painel'){
       navigate("/painel");
+    } else if(text === 'Caixa'){
+      navigate("/caixa");
     }
   }
 
@@ -152,7 +155,7 @@ export default function MiniDrawer(props: any) {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Cadastro usuários', 'Retirar senha', 'Painel'].map((text, index) => (
+          {['Cadastro usuários', 'Retirar senha', 'Painel', 'Caixa'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 onClick={() =>handleClickButton(text)}
@@ -169,7 +172,7 @@ export default function MiniDrawer(props: any) {
                     justifyContent: 'center',
                   }}
                 >
-                  {text === 'Cadastro usuários' ? <Add/> : text === 'Retirar senha' ? <KeyIcon/> : <TvIcon/>}
+                  {text === 'Cadastro usuários' ? <Add/> : text === 'Retirar senha' ? <KeyIcon/> : text === 'Painel' ? <TvIcon/> : <AccountBoxIcon/>}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

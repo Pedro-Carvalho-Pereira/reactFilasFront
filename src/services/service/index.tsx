@@ -115,8 +115,72 @@ class Service {
 
 
 
+  async getCaixas(token: string) {
 
-  async retirarSenha(data: SenhaPreferencial,token: string) {
+
+    const options = {
+      method: 'GET',
+      url: 'http://localhost:3000/usuario/listarCaixas',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+
+    return axios.request(options).then(function (response) {
+      return Promise.resolve(response);
+    }).catch(function (error) {
+      return Promise.reject(error);
+    });
+  }
+
+
+
+  async trocarExpediente(id: string, token: string) {
+
+
+    const options = {
+      method: 'PUT',
+      url: 'http://localhost:3000/usuario/trocarexpediente/' + id,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+    
+    return axios.request(options).then(function (response) {
+      return Promise.resolve(response);
+    }).catch(function (error) {
+      return Promise.reject(error);
+    });
+  }
+
+
+
+
+  async getSenhasEmOrdem(token: string) {
+
+
+    const options = {
+      method: 'GET',
+      url: 'http://localhost:3000/senha/listarEmOrdem',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+
+    return axios.request(options).then(function (response) {
+      return Promise.resolve(response);
+    }).catch(function (error) {
+      return Promise.reject(error);
+    });
+  }
+
+
+
+
+  async retirarSenha(data: SenhaPreferencial, token: string) {
     const options = {
       method: 'POST',
       url: 'http://localhost:3000/senha/cadastrar',
@@ -128,6 +192,25 @@ class Service {
     };
 
     return axios.request(options).then((response) => {
+      return Promise.resolve(response);
+    }).catch((error) => {
+      return Promise.reject(error);
+    })
+  }
+
+  async listarum(id: string,token: string) {
+
+
+    const options = {
+      method: 'GET',
+      url: 'http://localhost:3000/usuario/listarum/' + id,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+    
+     return axios.request(options).then(function (response) {
       return Promise.resolve(response);
     }).catch((error) => {
       return Promise.reject(error);

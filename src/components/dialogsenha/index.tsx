@@ -33,17 +33,19 @@ function PaperComponent(props: PaperProps) {
 export default function DraggableDialogSenha(props: any) {
   const [open, setOpen] = React.useState(false);
   const [id, setId] = React.useState('');
+  const [nome, setNome] = React.useState('');
   const [preferencial, setPreferencial] = React.useState('');
 
 
-  
 
- 
+
+
 
   function retirarSenha() {
 
     const data: SenhaPreferencial = {
-      preferencial: preferencial
+      preferencial: preferencial,
+      nome: nome,
     }
 
     service.retirarSenha(data, token!)
@@ -68,9 +70,14 @@ export default function DraggableDialogSenha(props: any) {
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
           Retirar senha
         </DialogTitle>
-        <Grid sx={{justifyContent:'center', display:'flex'}}>
-          
-          <FormControl style={{ width: '88%', marginTop: '17px', marginBottom:'17px' }}>
+        <Grid sx={{ justifyContent: 'center', display: 'flex', flexDirection: 'column' }}>
+
+          <Grid sx={{justifyContent:'center', display:'flex'}}>
+            <TextField sx={{width:'90%'}} value={nome} onChange={(n) => setNome(n.target.value)} id="outlined-basic" label="Nome" variant="outlined" />
+          </Grid>
+
+          <Grid sx={{justifyContent:'center', display:'flex'}}>
+          <FormControl style={{ width: '90%', marginTop: '17px', marginBottom: '17px' }}>
             <InputLabel id="demo-simple-select-label">Preferencial</InputLabel>
             <Select
               value={preferencial}
@@ -81,6 +88,7 @@ export default function DraggableDialogSenha(props: any) {
               <MenuItem value={'Não'}>Não</MenuItem>
             </Select>
           </FormControl>
+          </Grid>
 
 
         </Grid>

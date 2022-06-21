@@ -164,4 +164,19 @@ export type TypeLogin = {
 
   export type SenhaPreferencial = {
     preferencial: string;
+    nome: string;
+  }
+
+  export type SenhaTela = {
+    preferencial: string;
+    nome: string;
+    numeroSenha: string;
+  }
+
+  export type TypeUserCaixa = {
+    id: number;
+    nome: string;
+    email: string;
+    permission: string;
+    senhaAtenderId: string;
   }

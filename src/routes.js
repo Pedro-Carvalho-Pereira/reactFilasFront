@@ -4,6 +4,8 @@ import Login from './pages/login';
 import MainPage from './pages/mainpage';
 import Senhas from './pages/senhas';
 import Painel from './pages/painel';
+import Caixa from './pages/caixa';
+
 
 
 
@@ -27,6 +29,7 @@ export default function RoutesApp() {
         <Route path="/mainPage" element={<MainPage />} />
         <Route path="/senhas" element={<Senhas />} />
         <Route path="/painel" element={<Painel />} />
+        <Route path="/caixa" element={<Caixa />} />
       </Routes>
     </BrowserRouter>
   );

@@ -82,25 +82,31 @@ export default function DraggableDialogAddUser(props: any) {
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
           Adicionar usuário
         </DialogTitle>
+
         <Grid sx={{ mx: 3 }}>
-          <TextField style={{ width: '48%' }} value={nome} onChange={(n) => setNome(n.target.value)} id="outlined-basic" label="Nome" variant="outlined" />
-          <TextField style={{ width: '48%', marginLeft: '26px' }} value={email} onChange={(n) => setEmail(n.target.value)} id="outlined-basic" label="Email" variant="outlined" />
-          <TextField style={{ width: '48%', marginTop: '25px' }} value={senha} onChange={(n) => setSenha(n.target.value)} id="outlined-basic" label="Senha" variant="outlined" />
+          <Grid sx={{ justifyContent: 'space-around' }}>
+            <TextField style={{ width: '100%' }} value={nome} onChange={(n) => setNome(n.target.value)} id="outlined-basic" label="Nome" variant="outlined" />
+            <TextField style={{ width: '100%', marginLeft: '26px' }} value={email} onChange={(n) => setEmail(n.target.value)} id="outlined-basic" label="Email" variant="outlined" />
+          </Grid>
+        </Grid>
 
-          <FormControl style={{ width: '48%', marginTop: '25px', marginLeft: '26px' }}>
-            <InputLabel id="demo-simple-select-label">Permissão</InputLabel>
-            <Select
-              value={permission}
-              label="Permissão"
-              onChange={e => setPermission(e.target.value)}
-            >
-              <MenuItem value={'CAIXA'}>Caixa</MenuItem>
-              <MenuItem value={'ADMIN'}>Admin</MenuItem>
-            </Select>
-          </FormControl>
+        <Grid sx={{ mx: 3 }}>
+          <Grid sx={{ justifyContent: 'space-around' }}>
 
+            <FormControl style={{ width: '100%', marginTop: '25px' }}>
+              <InputLabel id="demo-simple-select-label">Permissão</InputLabel>
+              <Select
+                value={permission}
+                label="Permissão"
+                onChange={e => setPermission(e.target.value)}
+              >
+                <MenuItem value={'CAIXA'}>Caixa</MenuItem>
+                <MenuItem value={'ADMIN'}>Admin</MenuItem>
+              </Select>
+            </FormControl>
 
-          <Grid sx={{ mx: 3 }}>
+            <TextField style={{ width: '100%', marginTop: '25px', marginLeft: '25px' }} value={senha} onChange={(n) => setSenha(n.target.value)} id="outlined-basic" label="Senha" variant="outlined" />
+
           </Grid>
         </Grid>
 
@@ -111,8 +117,7 @@ export default function DraggableDialogAddUser(props: any) {
           <Button onClick={addUser}>Salvar</Button>
         </DialogActions>
 
-
       </Dialog>
-    </div>
+    </div >
   );
 }

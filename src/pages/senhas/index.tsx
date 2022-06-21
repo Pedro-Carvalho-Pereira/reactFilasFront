@@ -4,6 +4,7 @@ import MiniDrawer from '../../components/drawer'
 import '../../styles/global.css'
 import KeyIcon from '@mui/icons-material/Key';
 import DraggableDialogSenha from '../../components/dialogsenha';
+import "./senhas.css"
 
 const Senhas = () => {
     const [open, setOpen] = React.useState(false);
