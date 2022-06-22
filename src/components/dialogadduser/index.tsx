@@ -12,7 +12,6 @@ import { TypeSaveUser } from '../../services/types';
 import service from '../../services/service';
 let token = localStorage.getItem('@token');
 
-
 function PaperComponent(props: PaperProps) {
   return (
     <Draggable
@@ -24,10 +23,6 @@ function PaperComponent(props: PaperProps) {
   );
 }
 
-
-
-
-
 export default function DraggableDialogAddUser(props: any) {
   const [open, setOpen] = React.useState(false);
   const [senha, setSenha] = React.useState('');
@@ -35,9 +30,6 @@ export default function DraggableDialogAddUser(props: any) {
   const [showAlert, setShowAlert] = React.useState(false);
   const [nome, setNome] = React.useState('');
   const [permission, setPermission] = React.useState('');
-
-
-
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -49,7 +41,7 @@ export default function DraggableDialogAddUser(props: any) {
 
   function addUser() {
 
-    if (nome != '' || email != '' || permission != '' || senha != '') {
+    if (nome != '' && email != '' && permission != '' && senha != '') {
 
       const saveUsuario: TypeSaveUser = {
         nome: nome,
@@ -132,6 +124,6 @@ export default function DraggableDialogAddUser(props: any) {
           </DialogActions>
         </Grid>
       </Dialog>
-    </div >
+    </div>
   );
 }

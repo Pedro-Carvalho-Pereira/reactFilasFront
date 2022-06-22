@@ -44,7 +44,7 @@ export default function DraggableDialogSenha(props: any) {
 
   function retirarSenha() {
 
-    if(preferencial != '' || nome != ''){
+    if(preferencial != '' && nome != ''){
 
     const data: SenhaPreferencial = {
       preferencial: preferencial,
@@ -55,7 +55,7 @@ export default function DraggableDialogSenha(props: any) {
       .then((response: any) => {
         console.log(response.data.mensagem);
         props.setSenhaRetirada(response.data.mensagem);
-        setPreferencial('');
+        setPreferencial('vazio');
         setNome('');
         props.handleClose();
       })

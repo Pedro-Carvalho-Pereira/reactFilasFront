@@ -11,7 +11,6 @@ const Senhas = () => {
     const [added, setAdded] = React.useState(false);
     const [senhaRetirada, setSenhaRetirada] = React.useState('');
 
-
     function handleClose() {
         console.log("fechado")
         setOpen(false);
@@ -21,7 +20,6 @@ const Senhas = () => {
         console.log("open")
         setOpen(true);
     };
-
 
     return (
         <MiniDrawer title="Retirar Senha">
@@ -45,9 +43,6 @@ const Senhas = () => {
                                     </Button>
                                 </Grid>
 
-
-
-
                                 <Grid sx={{ justifyContent: 'center', display: 'flex', alignItems: 'center', flexDirection: 'column' }} xs={10}>
                                     <Typography sx={{ fontSize: '35px' }}>Senha retirada:</Typography>
 
@@ -55,14 +50,9 @@ const Senhas = () => {
                                         sx={{ marginTop: '35px', width: '300px', height: '190px', background: 'black', alignItems: 'center', justifyContent: 'center', display: 'flex' }}
                                     >
 
-
                                         <Typography sx={{ color: 'white', fontSize: '45px' }}>{senhaRetirada}</Typography>
 
-
                                     </Paper>
-
-
-
 
                                 </Grid>
 

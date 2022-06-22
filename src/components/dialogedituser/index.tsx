@@ -13,7 +13,6 @@ import { TypeEditUser, TypeSaveUser } from '../../services/types';
 import service from '../../services/service';
 let token = localStorage.getItem('@token');
 
-
 function PaperComponent(props: PaperProps) {
   return (
     <Draggable
@@ -25,10 +24,6 @@ function PaperComponent(props: PaperProps) {
   );
 }
 
-
-
-
-
 export default function DraggableDialogEditUser(props: any) {
   const [open, setOpen] = React.useState(false);
   const [senha, setSenha] = React.useState('');
@@ -36,7 +31,6 @@ export default function DraggableDialogEditUser(props: any) {
   const [nome, setNome] = React.useState('');
   const [id, setId] = React.useState('');
   const [permission, setPermission] = React.useState('');
-
 
   React.useEffect(() => {
     if (props.user) {
@@ -105,7 +99,6 @@ export default function DraggableDialogEditUser(props: any) {
             </Select>
           </FormControl>
 
-
         </Grid>
 
         <DialogActions style={{ marginRight: '20px' }}>
@@ -114,7 +107,6 @@ export default function DraggableDialogEditUser(props: any) {
           </Button>
           <Button onClick={editUser}>Salvar</Button>
         </DialogActions>
-
 
       </Dialog>
     </div>

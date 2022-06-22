@@ -130,9 +130,7 @@ const MainPage = () => {
 
             <DraggableDialogAddUser added={setAdded} open={open} handleClose={handleClose} />
 
-
         </MiniDrawer>
-
     )
 }
 

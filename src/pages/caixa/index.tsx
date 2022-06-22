@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, MenuItem, Paper, Select, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Container, Grid, MenuItem, Paper, Select, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import MiniDrawer from '../../components/drawer'
 import EditIcon from '@mui/icons-material/Edit';
@@ -73,6 +73,7 @@ const Caixa = () => {
     const [emExpediente, setEmExpediente] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('');
     const [caixas, setCaixas] = useState<TypeUserCaixa[]>([]);
+    const [showAlert, setShowAlert] = useState<boolean>(false);
     const [usuarioAtendimento, setUsuarioAtendimento] = useState<SenhaTela>();
 
     const [caixasOriginal, setCaixasOriginal] = useState<TypeUserCaixa[]>([]);
@@ -126,6 +127,7 @@ const Caixa = () => {
 
             })
             .catch((error) => {
+                setShowAlert(true)
                 console.log(error);
             })
 
@@ -218,16 +220,15 @@ const Caixa = () => {
                                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                                         <TableHead>
                                             <TableRow>
-                                                <StyledTableCell align="center">Nome</StyledTableCell>
+                                                <StyledTableCell align="left">Nome</StyledTableCell>
                                                 <StyledTableCell align="center">Senha</StyledTableCell>
                                                 <StyledTableCell align="center">Preferencial</StyledTableCell>
-
                                             </TableRow>
                                         </TableHead>
 
                                         <TableBody>
                                             <StyledTableRow>
-                                                <StyledTableCell sx={{ fontSize: '24px!important' }} align="center" component="th" scope="row">
+                                                <StyledTableCell sx={{ fontSize: '24px!important' }} align="left" component="th" scope="row">
                                                     {usuarioAtendimento?.nome}
                                                 </StyledTableCell>
                                                 <StyledTableCell sx={{ fontSize: '24px!important' }} align="center"> {usuarioAtendimento?.numeroSenha}</StyledTableCell>
@@ -243,7 +244,11 @@ const Caixa = () => {
                             </>
                         }
 
+                        {showAlert === true ?
+                            <Alert sx={{ marginTop: '50px' }} variant="outlined" severity="error" onClose={() => { setShowAlert(false) }}>Não existem senhas para serem chamadas</Alert>
+                            : ''}
                     </Container>
+
                 </Box>
             </Box>
 
