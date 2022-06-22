@@ -103,7 +103,7 @@ const Painel = () => {
 
                     <Typography sx={{ color: 'white', fontSize: '33px' }}>Caixa: {item.nome}</Typography>
                     <Typography sx={{ color: 'white', fontSize: '33px', height: '70%', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
-                      { item.senhaAtenderId === '' ? 'Inoperante' : 'ocupado'
+                      { item.senhaAtenderId === '' ? 'Inoperante' : item.senhaAtenderId
                       }
                     </Typography>
 

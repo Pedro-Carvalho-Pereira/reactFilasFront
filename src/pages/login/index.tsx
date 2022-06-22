@@ -33,7 +33,7 @@ export default function Login() {
         localStorage.setItem('@permission', response.data.permission);
         localStorage.setItem('@userId', response.data.userId);
 
-        if (response.data.permission === 'ADMIN') {
+        if (response.data.permission === 'ADMIN' || 'CAIXA') {
           window.history.replaceState(null, '', "/mainpage");
         }
 

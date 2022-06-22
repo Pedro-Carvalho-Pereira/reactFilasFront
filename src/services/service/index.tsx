@@ -147,7 +147,7 @@ class Service {
         Authorization: 'Bearer ' + token
       }
     };
-    
+
     return axios.request(options).then(function (response) {
       return Promise.resolve(response);
     }).catch(function (error) {
@@ -198,7 +198,47 @@ class Service {
     })
   }
 
-  async listarum(id: string,token: string) {
+
+  async adicionarSenhaAtendente(id: string, token: string, nome: string, senha: string) {
+
+
+    const options = {
+      method: 'PUT',
+      url: 'http://localhost:3000/usuario/adicionarsenhatendente/' + id,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      },
+      data: { nome: nome, senhaAtenderId: senha }
+    };
+
+    axios.request(options).then(function (response) {
+      return Promise.resolve(response);
+    }).catch((error) => {
+      return Promise.reject(error);
+    });
+  }
+
+  async puxarSenha(id: string, token: string) {
+
+    const options = {
+      method: 'PUT',
+      url: 'http://localhost:3000/usuario/puxarsenha/' + id,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+
+    return axios.request(options).then(function (response) {
+      return Promise.resolve(response);
+    }).catch((error) => {
+      return Promise.reject(error);
+    });
+
+  }
+
+  async listarum(id: string, token: string) {
 
 
     const options = {
@@ -209,8 +249,8 @@ class Service {
         Authorization: 'Bearer ' + token
       }
     };
-    
-     return axios.request(options).then(function (response) {
+
+    return axios.request(options).then(function (response) {
       return Promise.resolve(response);
     }).catch((error) => {
       return Promise.reject(error);

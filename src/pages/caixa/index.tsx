@@ -121,18 +121,28 @@ const Caixa = () => {
 
     function solicitarAtendimento() {
 
-        service.trocarExpediente(userId!, token!)
+        service.puxarSenha(userId!, token!)
             .then((response) => {
-                console.log(response.data);
-                setEmExpediente(response.data);
+                setUsuarioAtendimento(response.data[0]);
+                console.log(usuarioAtendimento)
+                service.adicionarSenhaAtendente(userId!, token!, response.data[0].nome, response.data[0].numeroSenha)
+                    .then((response) => {
+                        console.log(response)
+
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+
             })
             .catch((error) => {
                 console.log(error);
             })
 
+
     }
 
-    
+
 
     function loadSenhas() {
         service.getSenhasEmOrdem(token!)
@@ -207,8 +217,8 @@ const Caixa = () => {
                                     <Grid sx={{ justifyContent: 'center', display: 'flex' }} item xs={6}>
                                         <Item sx={{ background: 'black', width: '100%', borderRadius: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
 
-                                            <StyledButtonSol onClick={trocarExpediente} sx={{ backgroundColor: 'white' }}>
-                                                <Typography onClick={solicitarAtendimento} sx={{ fontSize: '36px', borderRadius:'30px', textAlign: 'center', color: 'black' }}>solicitar atendimento</Typography>
+                                            <StyledButtonSol onClick={solicitarAtendimento} sx={{ backgroundColor: 'white' }}>
+                                                <Typography sx={{ fontSize: '36px', borderRadius: '30px', textAlign: 'center', color: 'black' }}>solicitar atendimento</Typography>
                                             </StyledButtonSol>
                                         </Item>
 
@@ -219,7 +229,7 @@ const Caixa = () => {
                                         <Item sx={{ background: 'red', width: '100%', borderRadius: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
 
                                             <StyledButtonEnd onClick={trocarExpediente} sx={{ backgroundColor: 'black' }}>
-                                                <Typography sx={{ fontSize: '36px', borderRadius:'30px', textAlign: 'center', color: 'white' }}>encerrar expediente</Typography>
+                                                <Typography sx={{ fontSize: '36px', borderRadius: '30px', textAlign: 'center', color: 'white' }}>encerrar expediente</Typography>
                                             </StyledButtonEnd>
                                         </Item>
 
@@ -240,7 +250,7 @@ const Caixa = () => {
                                         </TableHead>
 
                                         <TableBody>
-                                            <StyledTableRow >
+                                            <StyledTableRow>
                                                 <StyledTableCell sx={{ fontSize: '24px!important' }} align="center" component="th" scope="row">
                                                     {usuarioAtendimento?.nome}
                                                 </StyledTableCell>
