@@ -60,7 +60,6 @@ const StyledButtonSol = styled(Button)`
   }
 `;
 
-
 const StyledButtonEnd = styled(Button)`
   background-color: grey;
   color: #fff;
@@ -69,10 +68,6 @@ const StyledButtonEnd = styled(Button)`
     background-color: #281114;
   }
 `;
-
-
-
-
 
 const Caixa = () => {
     const [emExpediente, setEmExpediente] = useState<boolean>(false);
@@ -87,8 +82,6 @@ const Caixa = () => {
     let token = localStorage.getItem('@token');
     let userId = localStorage.getItem('@userId');
 
-
-
     useEffect(() => {
 
         service.listarum(userId!, token!)
@@ -100,9 +93,6 @@ const Caixa = () => {
             .catch((error) => {
                 console.log(error);
             })
-
-
-
 
     }, []);
 
@@ -139,10 +129,7 @@ const Caixa = () => {
                 console.log(error);
             })
 
-
     }
-
-
 
     function loadSenhas() {
         service.getSenhasEmOrdem(token!)
@@ -184,15 +171,6 @@ const Caixa = () => {
                 >
                     <Container className='containerMaxWidth'>
 
-
-
-
-
-
-
-
-
-
                         {emExpediente === false ?
                             <Grid sx={{ justifyContent: 'space-between' }} mt={4} mb={6} container spacing={2}>
 
@@ -224,7 +202,6 @@ const Caixa = () => {
 
                                     </Grid>
 
-
                                     <Grid sx={{ justifyContent: 'center', display: 'flex' }} item xs={6}>
                                         <Item sx={{ background: 'red', width: '100%', borderRadius: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
 
@@ -237,7 +214,6 @@ const Caixa = () => {
                                 </Grid>
 
                                 <TableContainer component={Paper}>
-
 
                                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                                         <TableHead>
@@ -260,25 +236,16 @@ const Caixa = () => {
 
                                         </TableBody>
 
-
                                     </Table>
-
 
                                 </TableContainer>
 
                             </>
                         }
 
-
-
                     </Container>
                 </Box>
             </Box>
-
-
-
-
-
 
         </MiniDrawer >
     )

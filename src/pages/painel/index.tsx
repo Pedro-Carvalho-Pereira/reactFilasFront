@@ -38,9 +38,6 @@ const Item = styled(Paper)(({ theme }) => ({
   background: 'black',
 }));
 
-
-
-
 const Painel = () => {
   const [caixas, setCaixas] = useState<TypeUserCaixa[]>([]);
   const [caixasOriginal, setCaixasOriginal] = useState<TypeUserCaixa[]>([]);
@@ -92,10 +89,7 @@ const Painel = () => {
         >
           <Container className='containerMaxWidth'>
 
-
             <Grid sx={{ justifyContent: 'space-between' }} mt={4} mb={6} container spacing={2}>
-
-
 
               {caixas.map((item) => (
                 <Grid sx={{ justifyContent: 'center', display: 'flex' }} item xs={4}>
@@ -114,12 +108,6 @@ const Painel = () => {
 
               ))}
 
-
-
-
-
-
-
             </Grid>
 
 
@@ -135,7 +123,7 @@ const Painel = () => {
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell align="center">Nome</StyledTableCell>
+                    <StyledTableCell align="left">Nome</StyledTableCell>
                     <StyledTableCell align="center">Senha</StyledTableCell>
                     <StyledTableCell align="center">Preferencial</StyledTableCell>
 
@@ -145,7 +133,7 @@ const Painel = () => {
                 <TableBody>
                   {senhas.map((item) => (
                     <StyledTableRow key={item.nome}>
-                      <StyledTableCell sx={{ fontSize: '24px!important' }} align="center" component="th" scope="row">
+                      <StyledTableCell sx={{ fontSize: '24px!important' }} align="left" component="th" scope="row">
                         {item.nome}
                       </StyledTableCell>
                       <StyledTableCell sx={{ fontSize: '24px!important' }} align="center">{item.numeroSenha}</StyledTableCell>
@@ -155,19 +143,12 @@ const Painel = () => {
                   ))}
                 </TableBody>
 
-
               </Table>
-
 
             </TableContainer>
           </Container>
         </Box>
       </Box>
-
-
-
-
-
 
     </MiniDrawer>
   )

@@ -9,7 +9,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper, { PaperProps } from '@mui/material/Paper';
 import Draggable from 'react-draggable';
-import { FormControl, Grid, Input, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Alert, FormControl, Grid, Input, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { SenhaPreferencial, TypeEditUser, TypeSaveUser } from '../../services/types';
 import service from '../../services/service';
 let token = localStorage.getItem('@token');
@@ -32,6 +32,7 @@ function PaperComponent(props: PaperProps) {
 
 export default function DraggableDialogSenha(props: any) {
   const [open, setOpen] = React.useState(false);
+  const [showAlert, setShowAlert] = React.useState<boolean>(false);
   const [id, setId] = React.useState('');
   const [nome, setNome] = React.useState('');
   const [preferencial, setPreferencial] = React.useState('');
@@ -43,6 +44,8 @@ export default function DraggableDialogSenha(props: any) {
 
   function retirarSenha() {
 
+    if(preferencial != '' || nome != ''){
+
     const data: SenhaPreferencial = {
       preferencial: preferencial,
       nome: nome,
@@ -52,11 +55,17 @@ export default function DraggableDialogSenha(props: any) {
       .then((response: any) => {
         console.log(response.data.mensagem);
         props.setSenhaRetirada(response.data.mensagem);
+        setPreferencial('');
+        setNome('');
         props.handleClose();
       })
       .catch((error) => {
         console.log(error);
       })
+
+    } else {
+      setShowAlert(true)
+    }
   }
 
   return (
@@ -93,12 +102,21 @@ export default function DraggableDialogSenha(props: any) {
 
         </Grid>
 
+        <Grid sx={{ flexDirection: 'row', display: 'flex', padding: '12px', justifyContent:'end' }}>
+
+          { showAlert === true ?
+
+            <Alert variant="outlined" severity="warning" onClose={() => {setShowAlert(false) }}>Favor preencher os campos</Alert>
+          : ''}
+
         <DialogActions style={{ marginRight: '20px' }}>
           <Button autoFocus onClick={props.handleClose}>
             Cancelar
           </Button>
           <Button onClick={retirarSenha}>Retirar senha</Button>
         </DialogActions>
+
+        </Grid>
 
 
       </Dialog>
